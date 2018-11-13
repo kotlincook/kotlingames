@@ -84,8 +84,8 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <!--<mainClass>ui.PlayGame2048Kt</mainClass>-->
-                            <mainClass>ui.PlayGameOfFifteenKt</mainClass>
+                            <mainClass>ui.PlayGame2048Kt</mainClass>
+                            <!--<mainClass>ui.PlayGameOfFifteenKt</mainClass>-->
                         </manifest>
                     </archive>
                 </configuration>

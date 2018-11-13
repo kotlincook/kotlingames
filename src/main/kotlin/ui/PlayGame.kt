@@ -8,7 +8,6 @@ import java.awt.event.KeyAdapter
 import java.awt.event.KeyEvent
 import java.awt.image.ImageObserver
 import java.io.InputStream
-import javax.imageio.IIOImage
 import javax.imageio.ImageIO
 import javax.swing.JFrame
 import javax.swing.JPanel
@@ -44,10 +43,10 @@ class PlayGame(val game: Game, val settings: GameSettings) : JPanel() {
     override fun paint(g: Graphics) {
         super.paint(g)
         val image = ImageIO.read(getResourceAsStream("/Logo.png"))
-        val scaledInstance = image.getScaledInstance(250, 250, 0)
+        // val scaledInstance = image.getScaledInstance(250, 250, 0)
         g.color = settings.backgroundColor
         g.fillRect(0, 0, this.size.width, this.size.height)
-        g.drawImage(scaledInstance, 45, 335, ImageObserver{ img, infoflags, x, y, width, height -> true })
+        g.drawImage(image, 45, 335, ImageObserver{ img, infoflags, x, y, width, height -> true })
         for (y in 1..4) {
             for (x in 1..4) {
                 drawTile(g as Graphics2D, game[y, x] ?: 0, x - 1, y - 1)
@@ -88,10 +87,10 @@ class PlayGame(val game: Game, val settings: GameSettings) : JPanel() {
             g.color = Color(78, 139, 202)
             g.font = Font(FONT_NAME, Font.BOLD, 48)
             if (game.hasWon()) {
-                g.drawString("You won!", 68, 150)
+                g.drawString("F95 wins!", 68, 150)
             }
             if (!game.canMove()) {
-                g.drawString("Game over!", 45, 160)
+                g.drawString("Try again…", 45, 160)
             }
         }
         g.font = Font(FONT_NAME, Font.PLAIN, 18)

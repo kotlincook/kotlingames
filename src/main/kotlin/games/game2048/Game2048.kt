@@ -27,7 +27,7 @@ class Game2048(private val initializer: Game2048Initializer<Int>) : Game {
 
     override fun canMove() = board.any { it == null }
 
-    override fun hasWon() = board.any { it == 2048 }
+    override fun hasWon() = board.any { it == 256 }
 
     override fun processMove(direction: Direction) {
         if (board.moveValues(direction)) {
