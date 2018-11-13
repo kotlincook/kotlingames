@@ -6,6 +6,10 @@ import games.game.Game
 import java.awt.*
 import java.awt.event.KeyAdapter
 import java.awt.event.KeyEvent
+import java.awt.image.ImageObserver
+import java.io.InputStream
+import javax.imageio.IIOImage
+import javax.imageio.ImageIO
 import javax.swing.JFrame
 import javax.swing.JPanel
 import javax.swing.WindowConstants
@@ -33,10 +37,17 @@ class PlayGame(val game: Game, val settings: GameSettings) : JPanel() {
         game.initialize()
     }
 
+    fun getResourceAsStream(name: String): InputStream {
+        return object{}::class.java.getResourceAsStream(name)
+    }
+
     override fun paint(g: Graphics) {
         super.paint(g)
+        val image = ImageIO.read(getResourceAsStream("/Logo.png"))
+        val scaledInstance = image.getScaledInstance(250, 250, 0)
         g.color = settings.backgroundColor
         g.fillRect(0, 0, this.size.width, this.size.height)
+        g.drawImage(scaledInstance, 45, 335, ImageObserver{ img, infoflags, x, y, width, height -> true })
         for (y in 1..4) {
             for (x in 1..4) {
                 drawTile(g as Graphics2D, game[y, x] ?: 0, x - 1, y - 1)
@@ -100,7 +111,7 @@ fun playGame(game: Game, settings: GameSettings) {
     with(JFrame()) {
         title = settings.name
         defaultCloseOperation = WindowConstants.EXIT_ON_CLOSE
-        setSize(340, 400)
+        setSize(340, 620)
         isResizable = false
 
         add(PlayGame(game, settings))
