@@ -30,6 +30,9 @@ class PlayGame(val game: Game, val settings: GameSettings) : JPanel() {
                         game.processMove(direction)
                     }
                 }
+//                else if (e.keyCode == KeyEvent.VK_SPACE) {
+//                    game.initialize()
+//                }
                 repaint()
             }
         })
@@ -90,7 +93,7 @@ class PlayGame(val game: Game, val settings: GameSettings) : JPanel() {
                 g.drawString("F95 wins!", 68, 150)
             }
             if (!game.canMove()) {
-                g.drawString("Try again…", 45, 160)
+                g.drawString("Hm, sadly…", 45, 160)
             }
         }
         g.font = Font(FONT_NAME, Font.PLAIN, 18)
